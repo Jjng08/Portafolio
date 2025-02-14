@@ -1,3 +1,8 @@
+---
+import Header from "../components/Header.astro";
+import '@fontsource/zen-kaku-gothic-new/400.css';
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -8,15 +13,24 @@
 		<title>Astro Basics</title>
 	</head>
 	<body>
+		<div class="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+		<Header />
 		<slot />
+	
 	</body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
+<style is:global>
+	:root{
+		color-scheme: light dark;
+	}
+	html{
+		font-family: 'Zen Kaku Gothic New',system-ui, sans-serif;
+	}
+	body{
+		background-color: black;
+		display: flex;
+		flex-direction: column;
+		height: 100vh;
 	}
 </style>
