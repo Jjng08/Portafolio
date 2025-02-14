@@ -1,5 +1,6 @@
 ---
 import Header from "../components/Header.astro";
+import Welcome from "../components/Welcome.astro";
 import '@fontsource/zen-kaku-gothic-new/400.css';
 ---
 
@@ -13,9 +14,11 @@ import '@fontsource/zen-kaku-gothic-new/400.css';
 		<title>Portafolio Javier Nieves, Desarrollador y Programador Full stack</title>
 	</head>
 	<body>
-		<div class="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
 		<Header />
+		<Welcome />
 		<slot />
+		<div class="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+		
 	
 	</body>
 </html>
@@ -31,6 +34,9 @@ import '@fontsource/zen-kaku-gothic-new/400.css';
 		background-color: black;
 		display: flex;
 		flex-direction: column;
-		height: 100vh;
+		min-height: 100vh;
 	}
+
+	
+	
 </style>

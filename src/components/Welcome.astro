@@ -1,14 +1,16 @@
 ---
 import Badge from './Badge.astro';
-import background from '../assets/background.svg';
+import SectionContainer from './SectionContainer.astro';
 import Linkedin from '../icons/Linkedin.astro';
 import Github from '../icons/Github.astro';
 import Mail from '../icons/Mail.astro';
+import Experience from './Experience.astro';
+import StailUp from '../icons/StailUp.astro';
 ---
 
 
 <main >
-	<section class="w-full mx-auto lg:w-[740px] py-40">
+<SectionContainer id="top">
 	<h1 class="text-white text-5xl font-bold flex flex-row gap-x-4 pb-6">Hey, soy Javier Nieves 
 		<a href="https://www.linkedin.com/in/javier-nieves-898543286/" target="_blank" rel="noopener" class="flex justify-center items-center"><Badge>Disponible para trabajar</Badge></a>
 	</h1>
@@ -33,7 +35,15 @@ import Mail from '../icons/Mail.astro';
 				Email
 			</a>
 	</nav>
-	</section>
+	</SectionContainer>
+	<SectionContainer id="Experiencia">
+		
+		<h2 class="text-2xl font-semibold mb-6 gap-x-2 flex items-center">
+			<StailUp class="size-6"/>
+			Experiencia
+		</h2>
+		<Experience />
+	</SectionContainer>
 </main>
 
 	
