@@ -1,0 +1,40 @@
+---
+const projects = [
+    {
+        title: 'Custom ERP System',
+        description: 'Lidere el diseño e implementación de un sistema de punto de venta personalizado para un bar, integrando gestión de ventas, inventario y seguridad avanzada.',
+        github: '#',
+        tags: ['C#', 'JavaScript', 'ASP.NET', 'Entity Framework', 'SQL Server'],
+        image: ''
+    },
+    {
+        title: 'Sistema de Gestion Integral para Biblioteca',
+        description: 'Colabore en el desarrollo de un sistema de gestión para bibliotecas, incluyendo módulos para administración de libros, usuarios, préstamos y devoluciones.',
+        github: '#',
+        tags: ['Java', 'JPA', 'MySQL'],
+        image:''
+    },
+    {
+        title: 'Portfolio Website',
+        description: 'Diseñé y construí mi propio sitio web de portafolio para mostrar mis proyectos y habilidades a posibles empleadores.',
+        github: '#',
+        tags: ['Astro', 'Tailwind CSS', 'JavaScript'],
+        image: ''
+    }
+]
+---
+
+{
+    projects.map(({title, description, github, tags, image}) => (
+        <article>
+            <h3>{title}</h3>
+            <p>{description}</p>
+            <ul>
+                {tags.map(tag => (
+                    <li>{tag}</li>
+                ))}
+            </ul>
+            <img src={image} alt={`Captura de pantalla ${image}`} />
+        </article>
+        ))
+}
