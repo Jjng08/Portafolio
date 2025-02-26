@@ -1,17 +1,57 @@
 ---
+import CSharp from '../icons/C.astro';
+import Java from '../icons/Java.astro';
+import MySQL from '../icons/MySQL.astro';
+import AstroIcon from '../icons/Astro.astro';
+import TailwindIcon from '../icons/Tailwind.astro';
+import JavaScriptIcon from '../icons/JavaScript.astro';
+
+const TAGS = {
+    'C#': { 
+        name: 'C#',
+        class: 'bg-blue-500/20 text-blue-300',
+        Icon: CSharp
+    },
+    'Java': { 
+        name: 'Java',
+        class: 'bg-orange-500/20 text-orange-300',
+        Icon: Java
+    },
+    'MySQL': { 
+        name: 'MySQL',
+        class: 'bg-blue-400/20 text-blue-200',
+        Icon: MySQL
+    },
+    'Astro': { 
+        name: 'Astro',
+        class: 'bg-orange-500/20 text-orange-300',
+        Icon: AstroIcon
+    },
+    'Tailwind CSS': { 
+        name: 'Tailwind CSS',
+        class: 'bg-cyan-500/20 text-cyan-300',
+        Icon: TailwindIcon
+    },
+    'JavaScript': { 
+        name: 'JavaScript',
+        class: 'bg-yellow-500/20 text-yellow-300',
+        Icon: JavaScriptIcon
+    }
+}
+
 const projects = [
     {
         title: 'Custom ERP System',
         description: 'Lidere el diseño e implementación de un sistema de punto de venta personalizado para un bar, integrando gestión de ventas, inventario y seguridad avanzada.',
         github: '#',
-        tags: ['C#', 'JavaScript', 'ASP.NET', 'Entity Framework', 'SQL Server'],
+        tags: ['C#'],
         image: ''
     },
     {
         title: 'Sistema de Gestion Integral para Biblioteca',
         description: 'Colabore en el desarrollo de un sistema de gestión para bibliotecas, incluyendo módulos para administración de libros, usuarios, préstamos y devoluciones.',
         github: '#',
-        tags: ['Java', 'JPA', 'MySQL'],
+        tags: ['Java', 'MySQL'],
         image:''
     },
     {
@@ -26,15 +66,21 @@ const projects = [
 
 {
     projects.map(({title, description, github, tags, image}) => (
-        <article>
+        <article class="mb-10 rounded-xl border border-gray-700 bg-gray-800/30 p-4">
             <h3 class="text-2xl font-semibold text-yellow-100 mb-2">{title}</h3>
-            <p class="text-lg mb-4">{description}</p>
-            <ul>
-                {tags.map(tag => (
-                    <li>{tag}</li>
-                ))}
+            <p class="text-lg mb-4 text-gray-300">{description}</p>
+            <ul class="flex gap-2 flex-wrap">
+                {tags.map((tagName) => {
+                    const tag = TAGS[tagName];
+                    const TagIcon = tag.Icon;
+                    return (
+                        <li class={` items-center gap-1 rounded px-2 py-1 ${tag.class}`}>
+                            {TagIcon && <TagIcon class="size-4" />}
+                            <span>{tag.name}</span>
+                        </li>
+                    );
+                })}
             </ul>
-            <img class="rounded shadow-2xl shadow-white/10" src={image} alt={`Captura de pantalla ${image}`} />
         </article>
-        ))
+    ))
 }

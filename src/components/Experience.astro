@@ -1,5 +1,5 @@
 ---
-import EXP from './ExperienceItem.astro';
+import expe from './ExperienceItem.astro';
 
 const Experiencia ={
     title: 'Experience',
@@ -27,7 +27,7 @@ const Experiencia ={
 <ol class="relative border-s border-gray-200 dark:border-gray-700">                  
     {Experiencia.items.map((experencia) => (
         <li class="mb-10 ms-4">
-            <EXP {...experencia} />
+            <expe {...experencia} />
         </li>
     ))
     }
