@@ -1,5 +1,5 @@
 ---
-import expe from './ExperienceItem.astro';
+import EXPE from './ExperienceItem.astro';
 
 const Experiencia ={
     title: 'Experience',
@@ -14,6 +14,7 @@ const Experiencia ={
             date: 'Junio 2024',
             title: 'Sistema de Gestión Integral para Bibliotecas',
             description: 'Colabore en el desarrollo de un sistema de gestión para bibliotecas, incluyendo módulos para administración de libros, usuarios, préstamos y devoluciones. Tecnologías: Java, JPA (Java Persitence API), SQL.',
+            link: '#',
         },
         {
             date: 'Diciembre 2023',
@@ -27,7 +28,7 @@ const Experiencia ={
 <ol class="relative border-s border-gray-200 dark:border-gray-700">                  
     {Experiencia.items.map((experencia) => (
         <li class="mb-10 ms-4">
-            <expe {...experencia} />
+            <EXPE {...experencia} />
         </li>
     ))
     }

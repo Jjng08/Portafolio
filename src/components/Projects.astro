@@ -44,14 +44,14 @@ const projects = [
         title: 'Custom ERP System',
         description: 'Lidere el diseño e implementación de un sistema de punto de venta personalizado para un bar, integrando gestión de ventas, inventario y seguridad avanzada.',
         github: '#',
-        tags: ['C#'],
+        tags: ['C#','ASP.NET', 'Entity Framework'],
         image: ''
     },
     {
         title: 'Sistema de Gestion Integral para Biblioteca',
         description: 'Colabore en el desarrollo de un sistema de gestión para bibliotecas, incluyendo módulos para administración de libros, usuarios, préstamos y devoluciones.',
         github: '#',
-        tags: ['Java', 'MySQL'],
+        tags: ['Java','JPA', 'MySQL'],
         image:''
     },
     {
@@ -71,10 +71,20 @@ const projects = [
             <p class="text-lg mb-4 text-gray-300">{description}</p>
             <ul class="flex gap-2 flex-wrap">
                 {tags.map((tagName) => {
-                    const tag = TAGS[tagName];
+                
+                    const tag = TAGS[tagName as keyof typeof TAGS];
+                
+                    if (!tag) {
+                        return (
+                            <li class="items-center gap-1 rounded px-2 py-1 bg-gray-700 text-gray-300">
+                                <span>{tagName}</span>
+                            </li>
+                        );
+                    }
+       
                     const TagIcon = tag.Icon;
                     return (
-                        <li class={` items-center gap-1 rounded px-2 py-1 ${tag.class}`}>
+                        <li class={`flex items-center gap-1 rounded px-2 py-1 ${tag.class}`}>
                             {TagIcon && <TagIcon class="size-4" />}
                             <span>{tag.name}</span>
                         </li>
