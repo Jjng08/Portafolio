@@ -2,12 +2,17 @@
 import logo from '../assets/logo.jpg';
 ---
 
-<header class="flex justify-between items-center py-2 w-full xl:w-[1000px] mx-auto ">
+<header x-data="{ open: false }" class="relative flex justify-between items-center py-2 w-full xl:w-[1000px] mx-auto">
     <img class="rounded-full w-12 h-12" src={logo.src} alt="PortaStro"/>
 
+    <!-- Botón para abrir/cerrar el menú -->
+    <button @click="open = !open" class="md:hidden text-white text-2xl">
+        ☰
+    </button>
 
-
-    <nav class="flex flex-row gap-x-8 opacity-80">
+    <!-- Menú responsive -->
+    <nav :class="open ? 'flex' : 'hidden md:flex'"
+        class="absolute top-full left-0 w-full bg-black bg-opacity-90 flex flex-col items-center gap-4 py-4 md:relative md:top-0 md:flex-row md:bg-transparent md:w-auto md:gap-x-8 opacity-80 transition-all duration-300">
         <a href="#top">Inicio</a>
         <a href="#Experiencia">Experiencia</a>
         <a href="#Proyectos">Proyectos</a>
@@ -15,3 +20,5 @@ import logo from '../assets/logo.jpg';
         <a href="mailto:jjng0812@gmail.com?subject=Contacto desde Portfolio">Contacto</a>
     </nav>
 </header>
+
+
