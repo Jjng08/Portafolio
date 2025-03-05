@@ -2,7 +2,9 @@
 import logo from '../assets/logo.jpg';
 ---
 
-<header x-data="{ open: false }" class="relative flex justify-between items-center py-2 w-full xl:w-[1000px] mx-auto px-4 md:px-8">
+
+<header x-data="{ open: false }" class="sticky top-0 z-50 backdrop-blur-md shadow-md relative flex justify-between items-center py-2 w-full xl:w-[1000px] mx-auto px-4 md:px-8">
+
     <img class="rounded-full w-12 h-12" src={logo.src} alt="PortaStro"/>
 
     <button @click="open = !open" class="md:hidden text-white text-2xl">
@@ -10,13 +12,12 @@ import logo from '../assets/logo.jpg';
     </button>
 
     <nav :class="open ? 'flex' : 'hidden md:flex'"
-        class="absolute top-full left-0 w-full bg-black bg-opacity-90 flex flex-col items-center gap-4 py-4 md:relative md:top-0 md:flex-row md:bg-transparent md:w-auto md:gap-x-8 opacity-80 transition-all duration-300">
-        <a href="#top">Inicio</a>
-        <a href="#Experiencia">Experiencia</a>
-        <a href="#Proyectos">Proyectos</a>
-        <a href="#Sobre-mi">Sobre Mi</a>
-        <a href="mailto:jjng0812@gmail.com?subject=Contacto desde Portfolio">Contacto</a>
+        class="absolute top-full left-0 w-full bg-black bg-opacity-90 flex flex-col items-center gap-4 py-4 md:relative md:top-0 md:flex-row md:bg-transparent md:w-auto md:gap-x-8 transition-all duration-300">
+        <a href="#top"  class="text-yellow-400 font-medium hover:text-blue-300 transition-colors">Inicio</a>
+        <a href="#Experiencia" class="text-yellow-400 font-medium hover:text-blue-300 transition-colors">Experiencia</a>
+
+        <a href="#Proyectos" class="text-yellow-400 font-medium hover:text-blue-300 transition-colors">Proyectos</a>
+        <a href="#Sobre-mi" class="text-yellow-400 font-medium hover:text-blue-300 transition-colors">Sobre Mi</a>
+        <a href="mailto:jjng0812@gmail.com?subject=Contacto desde Portfolio" class="text-yellow-400 font-medium hover:text-blue-300 transition-colors">Contacto</a>
     </nav>
 </header>
-
-
