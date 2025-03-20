@@ -8,6 +8,8 @@ import System from "../icons/System.astro"
   data-dial-init 
   class="fixed end-6 bottom-6 group"
   x-data="{ open: false }"
+  x-on:mouseenter="open = true"
+  x-on:mouseleave="open = false"
 >
     <div 
       id="speed-dial-menu-default" 
@@ -21,7 +23,7 @@ import System from "../icons/System.astro"
       x-transition:leave-end="opacity-0"
     >
         <div id="tooltip-share" role="tooltip" class="absolute z-10 invisible inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
-            Share
+            Light
             <div class="tooltip-arrow" data-popper-arrow></div>
         </div>
         <button 
@@ -36,7 +38,7 @@ import System from "../icons/System.astro"
             <span class="sr-only">Light</span>
         </button>
         <div id="tooltip-print" role="tooltip" class="absolute z-10 invisible inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
-            Print
+            Light
             <div class="tooltip-arrow" data-popper-arrow></div>
         </div>
         <button 
@@ -51,7 +53,7 @@ import System from "../icons/System.astro"
             <span class="sr-only">Dark</span>
         </button>
         <div id="tooltip-download" role="tooltip" class="absolute z-10 invisible inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
-            Download
+            Dark
             <div class="tooltip-arrow" data-popper-arrow></div>
         </div>
         <button 
@@ -66,7 +68,7 @@ import System from "../icons/System.astro"
             <span class="sr-only">System</span>
         </button>
         <div id="tooltip-copy" role="tooltip" class="absolute z-10 invisible inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
-            Copy
+            System
             <div class="tooltip-arrow" data-popper-arrow></div>
         </div>
     </div>
@@ -74,7 +76,6 @@ import System from "../icons/System.astro"
       type="button" 
       aria-controls="speed-dial-menu-default" 
       class="flex items-center justify-center text-white bg-gray-400 rounded-full w-14 h-14 hover:bg-gray-500 dark:bg-gray-500 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-700"
-      x-on:click="open = !open"
       x-bind:aria-expanded="open.toString()"
     >
         <svg 
