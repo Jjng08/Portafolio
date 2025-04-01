@@ -3,17 +3,16 @@ interface Props {
   title: string;
   description: string;
   date: string;
-  link: string;
+  link?: string;
   index?: number;
 }
 const { title, description, date, link, index = 0 } = Astro.props;
 ---
 
-<p class="text-gray-100 dark:text-gray-300">{date}
-  <br/></p>
-  <h3 class="text-lg font-semibold text-yellow-100">{title}</h3>
-<p class=" text-base font-normal text-gray-300 dark:text-gray-400">{description}</p>
+<p class="text-secondary">{date}</p>
+<h3 class="text-lg font-semibold text-accent">{title}</h3>
+<p class="text-base font-normal text-text-secondary">{description}</p>
 
-<hr x-data="{}" x-show={index < 3} class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+<hr x-data="{}" x-show={index < 3} class="h-px my-8 bg-gray-700 border-0 dark:bg-gray-200">
 
 
