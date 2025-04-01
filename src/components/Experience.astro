@@ -1,39 +1,43 @@
 ---
-import EXPE from './ExperienceItem.astro';
+import EXPE from "./ExperienceItem.astro";
 
-const Experiencia ={
-    title: 'Experience',
+const Experiencia = {
+    title: "Experience",
     items: [
         {
-            date: 'Enero 2025',
-            title: 'Desarrollo a Medida Custom ERP System',
-            description: 'Lideré el diseño e implementación de un sistema de punto de venta personalizado para un bar, integrando gestión de ventas, inventario y seguridad avanzada. Tecnologías: C#, JavaScript, ASP.NET, Entity Framework.',
-            link: '#',
+            date: "Marzo 2025",
+            title: "Desarrollo Web: Explorardor de Videojuegos",
+            description:
+                "Desarrollé un explorador de videojuegos que permite a los usuarios buscar, filtrar y explorar una variedad de juegos disponibles en una base de datos. Tecnologías:React, Tailwind CSS, Vite, TypeScript.",
+            link: "https://epic-finder-games.vercel.app/",
+            index: 0,
+        },
+        {
+            date: "Enero 2025",
+            title: "Desarrollo a Medida Custom ERP System",
+            description:
+                "Lideré el diseño e implementación de un sistema de punto de venta personalizado para un bar, integrando gestión de ventas, inventario y seguridad avanzada. Tecnologías: C#, JavaScript, ASP.NET, Entity Framework.",
+            link: "#",
             index: 1,
         },
         {
-            date: 'Junio 2024',
-            title: 'Sistema de Gestión Integral para Bibliotecas',
-            description: 'Colaboré en el desarrollo de un sistema de gestión para bibliotecas, incluyendo módulos para administración de libros, usuarios, préstamos y devoluciones. Tecnologías: Java, JPA (Java Persitence API), SQL.',
-            link: '#',
+            date: "Junio 2024",
+            title: "Sistema de Gestión Integral para Bibliotecas",
+            description:
+                "Colaboré en el desarrollo de un sistema de gestión para bibliotecas, incluyendo módulos para administración de libros, usuarios, préstamos y devoluciones. Tecnologías: Java, JPA (Java Persitence API), SQL.",
+            link: "#",
             index: 2,
-        },
-        {
-            date: 'Enero 2024',
-            title: 'Desarrollo a Medida: Arcade Videogame para Windows:',
-            description: 'Diseñé y desarrollo un juego interactivo basado en el clásico “Whack A Mole”, implemente lógica de juego, manejo de eventos y una interfaz gráfica amigable.',
-            link: '#',
-            index: 3,
         },
     ],
 };
 ---
-<ol class="relative border-s border-gray-200 dark:border-gray-700">                  
-    {Experiencia.items.map((experencia) => (
-        <li class="mb-10 ms-4">
-            <EXPE {...experencia} />
-        </li>
-    ))
+
+<ol class="relative border-s border-gray-200 dark:border-gray-700">
+    {
+        Experiencia.items.map((experencia) => (
+            <li class="mb-10 ms-4">
+                <EXPE {...experencia} />
+            </li>
+        ))
     }
 </ol>
-

@@ -5,41 +5,79 @@ import MySQL from '../icons/MySQL.astro';
 import AstroIcon from '../icons/Astro.astro';
 import TailwindIcon from '../icons/Tailwind.astro';
 import JavaScriptIcon from '../icons/JavaScript.astro';
+import ReactIcon from '../icons/React.astro';
+import RoutesIcon from '../icons/Routes.astro';
+import ViteIcon from '../icons/Vite.astro';
+import TypeScriptIcon from '../icons/Typescript.astro';
 
 const TAGS = {
-    'C#': { 
+    'C#': {
         name: 'C#',
         class: 'bg-blue-500/20 text-blue-300',
         Icon: CSharp
     },
-    'Java': { 
+    'Java': {
         name: 'Java',
         class: 'bg-orange-500/20 text-orange-300',
         Icon: Java
     },
-    'MySQL': { 
+    'MySQL': {
         name: 'MySQL',
         class: 'bg-blue-400/20 text-blue-200',
         Icon: MySQL
     },
-    'Astro': { 
+    'Astro': {
         name: 'Astro',
         class: 'bg-orange-500/20 text-orange-300',
         Icon: AstroIcon
     },
-    'Tailwind CSS': { 
+    'Tailwind CSS': {
         name: 'Tailwind CSS',
         class: 'bg-cyan-500/20 text-cyan-300',
         Icon: TailwindIcon
     },
-    'JavaScript': { 
+    'JavaScript': {
         name: 'JavaScript',
         class: 'bg-yellow-500/20 text-yellow-300',
         Icon: JavaScriptIcon
+    },
+    'React': {
+        name: 'React',
+        class: 'bg-cyan-500/20 text-cyan-300',
+        Icon: ReactIcon
+    },
+    'React Routes': {
+        name: 'React Routes',
+        class: 'bg-red-500/20 text-red-300',
+        Icon: RoutesIcon
+    },
+    'Vite': {
+        name: 'Vite',
+        class: 'bg-green-500/20 text-green-300',
+        Icon: ViteIcon
+    },
+    'TypeScript': {
+        name: 'TypeScript',
+        class: 'bg-purple-500/20 text-purple-300',
+        Icon: TypeScriptIcon
     }
 }
 
 const projects = [
+    {
+        title: 'Explorador de Videojuegos',
+        description: 'Desarrollé un explorador de videojuegos que permite a los usuarios buscar, filtrar y explorar una variedad de juegos disponibles en una base de datos.',
+        github: '#',
+        tags: ['React', 'React Routes','Tailwind CSS', 'Vite', 'TypeScript'],
+        image: "/projects/game.jpg"
+    },
+    {
+        title: 'Portfolio Website',
+        description: 'Diseñé y construí mi propio sitio web de portafolio para mostrar mis proyectos y habilidades a posibles empleadores.',
+        github: '#',
+        tags: ['Astro', 'Tailwind CSS', 'JavaScript'],
+        image: "/projects/porfolio.jpg"
+    },
     {
         title: 'Custom ERP System',
         description: 'Lidere el diseño e implementación de un sistema de punto de venta personalizado para un bar, integrando gestión de ventas, inventario y seguridad avanzada.',
@@ -54,13 +92,6 @@ const projects = [
         tags: ['Java','JPA', 'MySQL'],
         image: "/projects/library.jpg"
     },
-    {
-        title: 'Portfolio Website',
-        description: 'Diseñé y construí mi propio sitio web de portafolio para mostrar mis proyectos y habilidades a posibles empleadores.',
-        github: '#',
-        tags: ['Astro', 'Tailwind CSS', 'JavaScript'],
-        image: "/projects/porfolio.jpg"
-    }
 ]
 ---
 
@@ -72,9 +103,9 @@ const projects = [
             <p class="text-lg mb-4 text-gray-300">{description}</p>
             <ul class="flex gap-2 flex-wrap">
                 {tags.map((tagName) => {
-                
+
                     const tag = TAGS[tagName as keyof typeof TAGS];
-                
+
                     if (!tag) {
                         return (
                             <li class="items-center gap-1 rounded px-2 py-1 bg-gray-700 text-gray-300">
@@ -82,7 +113,7 @@ const projects = [
                             </li>
                         );
                     }
-       
+
                     const TagIcon = tag.Icon;
                     return (
                         <li class={`flex items-center gap-1 rounded px-2 py-1 ${tag.class}`}>
