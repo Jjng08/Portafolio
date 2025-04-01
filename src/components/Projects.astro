@@ -95,34 +95,120 @@ const projects = [
 ]
 ---
 
-{
-    projects.map(({title, description, github, tags, image}) => (
-        <article class="mb-10 rounded-xl border border-card-border bg-card p-4 transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl">
-            <img src={image} alt={title} class="w-full h-48 object-cover rounded-xl mb-4" />
-            <h3 class="text-2xl font-semibold text-accent mb-2">{title}</h3>
-            <p class="text-lg mb-4 text-text-secondary">{description}</p>
-            <ul class="flex gap-2 flex-wrap">
-                {tags.map((tagName) => {
+<div id="projectsContainer">
+    {
+        projects.map(({title, description, github, tags, image}) => (
+            <article class="project-card mb-10 rounded-xl border bg-card p-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
+                <img src={image} alt={title} class="w-full h-48 object-cover rounded-xl mb-4 project-image" />
+                <h3 class="text-2xl font-semibold text-accent mb-2">{title}</h3>
+                <p class="text-lg mb-4 text-text-secondary">{description}</p>
+                <ul class="flex gap-2 flex-wrap project-tags">
+                    {tags.map((tagName) => {
 
-                    const tag = TAGS[tagName as keyof typeof TAGS];
+                        const tag = TAGS[tagName as keyof typeof TAGS];
 
-                    if (!tag) {
+                        if (!tag) {
+                            return (
+                                <li class="items-center gap-1 rounded px-2 py-1 bg-card text-text-secondary tag-item">
+                                    <span>{tagName}</span>
+                                </li>
+                            );
+                        }
+
+                        const TagIcon = tag.Icon;
                         return (
-                            <li class="items-center gap-1 rounded px-2 py-1 bg-card text-text-secondary">
-                                <span>{tagName}</span>
+                            <li class={`flex items-center gap-1 rounded px-2 py-1 ${tag.class} tag-item`}>
+                                {TagIcon && <TagIcon class="size-4 tag-icon" />}
+                                <span>{tag.name}</span>
                             </li>
                         );
-                    }
+                    })}
+                </ul>
+            </article>
+         ))
+    }
+</div>
 
-                    const TagIcon = tag.Icon;
-                    return (
-                        <li class={`flex items-center gap-1 rounded px-2 py-1 ${tag.class}`}>
-                            {TagIcon && <TagIcon class="size-4" />}
-                            <span>{tag.name}</span>
-                        </li>
-                    );
-                })}
-            </ul>
-        </article>
-     ))
-}
+<style>
+    :root {
+        --project-border-color: var(--border-card);
+    }
+
+    html.dark #projectsContainer {
+        --project-border-color: #444;
+    }
+
+    html.dark .project-card {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    html.grayscale #projectsContainer {
+        --project-border-color: #555;
+    }
+
+    html.grayscale .project-image {
+        filter: grayscale(100%);
+    }
+
+    html.grayscale .project-tags li {
+        background-color: rgba(75, 75, 75, 0.2) !important;
+        color: rgb(200, 200, 200) !important;
+    }
+
+    .project-card {
+        border-color: var(--project-border-color);
+    }
+
+    /* Estilos específicos para modo light */
+    html:not(.dark):not(.grayscale) .tag-item {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Ajustes para los iconos en modo light */
+    html:not(.dark):not(.grayscale) .tag-item.bg-blue-500\/20 {
+        background-color: rgba(59, 130, 246, 0.15);
+        color: rgb(37, 99, 235);
+    }
+
+    html:not(.dark):not(.grayscale) .tag-item.bg-orange-500\/20 {
+        background-color: rgba(249, 115, 22, 0.15);
+        color: rgb(234, 88, 12);
+    }
+
+    html:not(.dark):not(.grayscale) .tag-item.bg-cyan-500\/20 {
+        background-color: rgba(6, 182, 212, 0.15);
+        color: rgb(8, 145, 178);
+    }
+
+    html:not(.dark):not(.grayscale) .tag-item.bg-yellow-500\/20 {
+        background-color: rgba(234, 179, 8, 0.15);
+        color: rgb(202, 138, 4);
+    }
+
+    html:not(.dark):not(.grayscale) .tag-item.bg-red-500\/20 {
+        background-color: rgba(239, 68, 68, 0.15);
+        color: rgb(220, 38, 38);
+    }
+
+    html:not(.dark):not(.grayscale) .tag-item.bg-green-500\/20 {
+        background-color: rgba(34, 197, 94, 0.15);
+        color: rgb(22, 163, 74);
+    }
+
+    html:not(.dark):not(.grayscale) .tag-item.bg-purple-500\/20 {
+        background-color: rgba(168, 85, 247, 0.15);
+        color: rgb(147, 51, 234);
+    }
+
+    html:not(.dark):not(.grayscale) .tag-item.bg-blue-400\/20 {
+        background-color: rgba(96, 165, 250, 0.15);
+        color: rgb(59, 130, 246);
+    }
+</style>
+
+<script>
+    // El cambio de tema ahora está integrado con el sistema global de temas
+    // Este componente responderá automáticamente a los cambios de tema
+    // mediante los selectores CSS que detectan las clases en el elemento html
+</script>
