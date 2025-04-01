@@ -3,24 +3,61 @@ import Header from "../components/Header.astro";
 import Welcome from "../components/Welcome.astro";
 import Footer from "../components/Footer.astro";
 import '@fontsource/zen-kaku-gothic-new/400.css';
+import ThemeToggle from "../components/ThemeToggle.astro";
+import { ViewTransitions } from "astro:transitions";
+
+const {
+	PUBLIC_SITE_TITLE,
+	PUBLIC_SITE_DESCRIPTION,
+	PUBLIC_DEFAULT_THEME
+} = import.meta.env;
+
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title: propTitle, description: propDescription } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es" class={PUBLIC_DEFAULT_THEME}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/prompt.svg" />
+		<meta name="description" content={PUBLIC_SITE_DESCRIPTION} />
 		<meta name="generator" content={Astro.generator} />
 		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-		<title>Portafolio Javier Nieves, Desarrollador y Programador Full stack</title>
+		<script define:vars={{ defaultTheme: PUBLIC_DEFAULT_THEME }}>
+			// Función para manejar el tema
+			function handleTheme() {
+				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+				const theme = localStorage.getItem('theme') || defaultTheme;
+
+				if (theme === 'dark' || (theme === 'system' && prefersDark)) {
+					document.documentElement.classList.add('dark');
+				} else {
+					document.documentElement.classList.remove('dark');
+				}
+			}
+
+			// Aplica el tema inicial
+			handleTheme();
+
+			// Escucha cambios en la preferencia del sistema
+			window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleTheme);
+		</script>
+		<title>{PUBLIC_SITE_TITLE}</title>
+		<ViewTransitions />
 	</head>
 	<body>
 		<Header />
+		<ThemeToggle />
 		<Welcome />
 		<slot />
-		<div class="fixed top-0 z-[-2] h-full w-full bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
-		
+		<div class="fixed top-0 z-[-2] h-full w-full bg-white dark:bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.5),rgba(255,255,255,0))] dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+
 	<Footer />
 	</body>
 </html>
@@ -28,20 +65,66 @@ import '@fontsource/zen-kaku-gothic-new/400.css';
 <style is:global>
 	:root{
 		color-scheme: light dark;
+		--color-primary: #111827;
+		--color-secondary: #374151;
+		--color-accent: #ca8a04;
+		--color-background: #ffffff;
+		--color-card: #f3f4f6;
+		--color-card-border: #d1d5db;
+		--color-text: #111827;
+		--color-text-secondary: #4b5563;
+		--color-heading: #111827;
+		--color-separator: #e5e7eb;
 	}
+
+	:root.dark {
+		--color-primary: #ffffff;
+		--color-secondary: rgba(191, 219, 254, 0.7);
+		--color-accent: #fbbf24;
+		--color-background: #13151a;
+		--color-card: rgba(17, 24, 39, 0.8);
+		--color-card-border: rgba(255, 255, 255, 0.1);
+		--color-text: #ffffff;
+		--color-text-secondary: rgba(254, 226, 226, 0.9);
+		--color-heading: #ffffff;
+		--color-separator: rgba(255, 255, 255, 0.1);
+	}
+
 	html{
 		font-family: 'Zen Kaku Gothic New',system-ui, sans-serif;
+		background-color: var(--color-background);
+		color: var(--color-text);
 	}
 	body{
-		background-color: black;
+		background-color: transparent;
 		display: flex;
 		flex-direction: column;
 		min-height: 100vh;
 	}
-header {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
+	header {
+		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	}
 
-	
-	
+	h1, h2, h3, h4, h5, h6 {
+		color: var(--color-heading);
+	}
+
+	.card {
+		background-color: var(--color-card);
+		border: 1px solid var(--color-card-border);
+	}
+
+	.text-accent {
+		color: var(--color-accent);
+	}
+
+	.text-secondary {
+		color: var(--color-text-secondary);
+	}
+
+	hr {
+		border-color: var(--color-separator);
+	}
 </style>
+
+

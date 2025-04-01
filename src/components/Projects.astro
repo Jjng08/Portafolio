@@ -5,41 +5,79 @@ import MySQL from '../icons/MySQL.astro';
 import AstroIcon from '../icons/Astro.astro';
 import TailwindIcon from '../icons/Tailwind.astro';
 import JavaScriptIcon from '../icons/JavaScript.astro';
+import ReactIcon from '../icons/React.astro';
+import RoutesIcon from '../icons/Routes.astro';
+import ViteIcon from '../icons/Vite.astro';
+import TypeScriptIcon from '../icons/Typescript.astro';
 
 const TAGS = {
-    'C#': { 
+    'C#': {
         name: 'C#',
         class: 'bg-blue-500/20 text-blue-300',
         Icon: CSharp
     },
-    'Java': { 
+    'Java': {
         name: 'Java',
         class: 'bg-orange-500/20 text-orange-300',
         Icon: Java
     },
-    'MySQL': { 
+    'MySQL': {
         name: 'MySQL',
         class: 'bg-blue-400/20 text-blue-200',
         Icon: MySQL
     },
-    'Astro': { 
+    'Astro': {
         name: 'Astro',
         class: 'bg-orange-500/20 text-orange-300',
         Icon: AstroIcon
     },
-    'Tailwind CSS': { 
+    'Tailwind CSS': {
         name: 'Tailwind CSS',
         class: 'bg-cyan-500/20 text-cyan-300',
         Icon: TailwindIcon
     },
-    'JavaScript': { 
+    'JavaScript': {
         name: 'JavaScript',
         class: 'bg-yellow-500/20 text-yellow-300',
         Icon: JavaScriptIcon
+    },
+    'React': {
+        name: 'React',
+        class: 'bg-cyan-500/20 text-cyan-300',
+        Icon: ReactIcon
+    },
+    'React Routes': {
+        name: 'React Routes',
+        class: 'bg-red-500/20 text-red-300',
+        Icon: RoutesIcon
+    },
+    'Vite': {
+        name: 'Vite',
+        class: 'bg-green-500/20 text-green-300',
+        Icon: ViteIcon
+    },
+    'TypeScript': {
+        name: 'TypeScript',
+        class: 'bg-purple-500/20 text-purple-300',
+        Icon: TypeScriptIcon
     }
 }
 
 const projects = [
+    {
+        title: 'Explorador de Videojuegos',
+        description: 'Desarrollé un explorador de videojuegos que permite a los usuarios buscar, filtrar y explorar una variedad de juegos disponibles en una base de datos.',
+        github: '#',
+        tags: ['React', 'React Routes','Tailwind CSS', 'Vite', 'TypeScript'],
+        image: "/projects/game.jpg"
+    },
+    {
+        title: 'Portfolio Website',
+        description: 'Diseñé y construí mi propio sitio web de portafolio para mostrar mis proyectos y habilidades a posibles empleadores.',
+        github: '#',
+        tags: ['Astro', 'Tailwind CSS', 'JavaScript'],
+        image: "/projects/porfolio.jpg"
+    },
     {
         title: 'Custom ERP System',
         description: 'Lidere el diseño e implementación de un sistema de punto de venta personalizado para un bar, integrando gestión de ventas, inventario y seguridad avanzada.',
@@ -54,44 +92,123 @@ const projects = [
         tags: ['Java','JPA', 'MySQL'],
         image: "/projects/library.jpg"
     },
-    {
-        title: 'Portfolio Website',
-        description: 'Diseñé y construí mi propio sitio web de portafolio para mostrar mis proyectos y habilidades a posibles empleadores.',
-        github: '#',
-        tags: ['Astro', 'Tailwind CSS', 'JavaScript'],
-        image: "/projects/porfolio.jpg"
-    }
 ]
 ---
 
-{
-    projects.map(({title, description, github, tags, image}) => (
-        <article class="mb-10 rounded-xl border border-gray-700 bg-gray-800/30 p-4">
-            <img src={image} alt={title} class="w-full h-48 object-cover rounded-xl mb-4" />
-            <h3 class="text-2xl font-semibold text-yellow-100 mb-2">{title}</h3>
-            <p class="text-lg mb-4 text-gray-300">{description}</p>
-            <ul class="flex gap-2 flex-wrap">
-                {tags.map((tagName) => {
-                
-                    const tag = TAGS[tagName as keyof typeof TAGS];
-                
-                    if (!tag) {
+<div id="projectsContainer">
+    {
+        projects.map(({title, description, github, tags, image}) => (
+            <article class="project-card mb-10 rounded-xl border bg-card p-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
+                <img src={image} alt={title} class="w-full h-48 object-cover rounded-xl mb-4 project-image" />
+                <h3 class="text-2xl font-semibold text-accent mb-2">{title}</h3>
+                <p class="text-lg mb-4 text-text-secondary">{description}</p>
+                <ul class="flex gap-2 flex-wrap project-tags">
+                    {tags.map((tagName) => {
+
+                        const tag = TAGS[tagName as keyof typeof TAGS];
+
+                        if (!tag) {
+                            return (
+                                <li class="items-center gap-1 rounded px-2 py-1 bg-card text-text-secondary tag-item">
+                                    <span>{tagName}</span>
+                                </li>
+                            );
+                        }
+
+                        const TagIcon = tag.Icon;
                         return (
-                            <li class="items-center gap-1 rounded px-2 py-1 bg-gray-700 text-gray-300">
-                                <span>{tagName}</span>
+                            <li class={`flex items-center gap-1 rounded px-2 py-1 ${tag.class} tag-item`}>
+                                {TagIcon && <TagIcon class="size-4 tag-icon" />}
+                                <span>{tag.name}</span>
                             </li>
                         );
-                    }
-       
-                    const TagIcon = tag.Icon;
-                    return (
-                        <li class={`flex items-center gap-1 rounded px-2 py-1 ${tag.class}`}>
-                            {TagIcon && <TagIcon class="size-4" />}
-                            <span>{tag.name}</span>
-                        </li>
-                    );
-                })}
-            </ul>
-        </article>
-    ))
-}
+                    })}
+                </ul>
+            </article>
+         ))
+    }
+</div>
+
+<style>
+    :root {
+        --project-border-color: var(--border-card);
+    }
+
+    html.dark #projectsContainer {
+        --project-border-color: #444;
+    }
+
+    html.dark .project-card {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    html.grayscale #projectsContainer {
+        --project-border-color: #555;
+    }
+
+    html.grayscale .project-image {
+        filter: grayscale(100%);
+    }
+
+    html.grayscale .project-tags li {
+        background-color: rgba(75, 75, 75, 0.2) !important;
+        color: rgb(200, 200, 200) !important;
+    }
+
+    .project-card {
+        border-color: var(--project-border-color);
+    }
+
+    /* Estilos específicos para modo light */
+    html:not(.dark):not(.grayscale) .tag-item {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Ajustes para los iconos en modo light */
+    html:not(.dark):not(.grayscale) .tag-item.bg-blue-500\/20 {
+        background-color: rgba(59, 130, 246, 0.15);
+        color: rgb(37, 99, 235);
+    }
+
+    html:not(.dark):not(.grayscale) .tag-item.bg-orange-500\/20 {
+        background-color: rgba(249, 115, 22, 0.15);
+        color: rgb(234, 88, 12);
+    }
+
+    html:not(.dark):not(.grayscale) .tag-item.bg-cyan-500\/20 {
+        background-color: rgba(6, 182, 212, 0.15);
+        color: rgb(8, 145, 178);
+    }
+
+    html:not(.dark):not(.grayscale) .tag-item.bg-yellow-500\/20 {
+        background-color: rgba(234, 179, 8, 0.15);
+        color: rgb(202, 138, 4);
+    }
+
+    html:not(.dark):not(.grayscale) .tag-item.bg-red-500\/20 {
+        background-color: rgba(239, 68, 68, 0.15);
+        color: rgb(220, 38, 38);
+    }
+
+    html:not(.dark):not(.grayscale) .tag-item.bg-green-500\/20 {
+        background-color: rgba(34, 197, 94, 0.15);
+        color: rgb(22, 163, 74);
+    }
+
+    html:not(.dark):not(.grayscale) .tag-item.bg-purple-500\/20 {
+        background-color: rgba(168, 85, 247, 0.15);
+        color: rgb(147, 51, 234);
+    }
+
+    html:not(.dark):not(.grayscale) .tag-item.bg-blue-400\/20 {
+        background-color: rgba(96, 165, 250, 0.15);
+        color: rgb(59, 130, 246);
+    }
+</style>
+
+<script>
+    // El cambio de tema ahora está integrado con el sistema global de temas
+    // Este componente responderá automáticamente a los cambios de tema
+    // mediante los selectores CSS que detectan las clases en el elemento html
+</script>
