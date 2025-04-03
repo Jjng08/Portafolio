@@ -3,16 +3,14 @@ import logo from '../assets/logo.jpg';
 import { Image } from "astro:assets";
 ---
 
-
-<header x-data="{ open: false }" class="sticky top-0 z-50 backdrop-blur-md shadow-md  flex items-center py-2 w-full xl:w-[1000px] mx-auto px-4 md:px-8">
-
-
-    <button @click="open = !open" class="md:hidden text-primary text-2xl">
-        ☰
+<header class="sticky top-0 z-50 backdrop-blur-md shadow-md flex items-center py-2 w-full xl:w-[1000px] mx-auto px-4 md:px-8">
+    <button id="menuButton" class="md:hidden text-primary bg-background/80 backdrop-blur-sm p-2 rounded-lg hover:bg-background/90 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" class="transition-transform duration-300"/>
+        </svg>
     </button>
 
-    <nav :class="open ? 'flex' : 'hidden md:flex' h-auto"
-        class="absolute top-full left-0 w-full bg-background/95 flex flex-col items-center gap-6 py-6 md:relative md:top-0 md:flex-row md:bg-transparent md:w-full md:justify-between md:py-0 transition-all duration-300">
+    <nav id="navMenu" class="absolute top-full left-0 w-full bg-background/95 opacity-0 invisible md:opacity-100 md:visible flex flex-col items-center gap-6 py-6 md:relative md:top-0 md:flex-row md:bg-transparent md:w-full md:justify-between md:py-0 transition-all duration-300 ease-in-out">
         <div class="hidden md:block md:flex-1 md:min-w-[80px]"></div>
         <ul class="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 w-full md:w-auto">
             <li class="w-full md:w-auto text-center"><a href="#top" class="text-accent font-medium hover:text-secondary transition-colors py-2 px-3 block">Inicio</a></li>
@@ -26,3 +24,48 @@ import { Image } from "astro:assets";
         </div>
     </nav>
 </header>
+
+<script>
+    const menuButton = document.getElementById('menuButton');
+    const navMenu = document.getElementById('navMenu');
+    const menuIcon = menuButton?.querySelector('svg');
+
+    function closeMenu() {
+        if (navMenu && !navMenu.classList.contains('invisible')) {
+            navMenu.classList.add('invisible');
+            navMenu.classList.add('opacity-0');
+            menuIcon?.classList.remove('rotate-90');
+        }
+    }
+
+    menuButton?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (navMenu?.classList.contains('invisible')) {
+            navMenu.classList.remove('invisible');
+            navMenu.classList.remove('opacity-0');
+            menuIcon?.classList.add('rotate-90');
+        } else {
+            closeMenu();
+        }
+    });
+
+    // Cerrar el menú cuando se hace clic en un enlace
+    const navLinks = navMenu?.querySelectorAll('a');
+    navLinks?.forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    // Cerrar el menú cuando se hace clic fuera
+    document.addEventListener('click', (e) => {
+        if (navMenu && !navMenu.contains(e.target as Node) && e.target !== menuButton) {
+            closeMenu();
+        }
+    });
+
+    // Cerrar el menú cuando se redimensiona la ventana a tamaño desktop
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) { // 768px es el breakpoint md de Tailwind
+            closeMenu();
+        }
+    });
+</script>

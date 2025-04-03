@@ -28,27 +28,7 @@ const { title: propTitle, description: propDescription } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/prompt.svg" />
 		<meta name="description" content={PUBLIC_SITE_DESCRIPTION} />
 		<meta name="generator" content={Astro.generator} />
-		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-		<script define:vars={{ defaultTheme: PUBLIC_DEFAULT_THEME }}>
-			// Función para manejar el tema
-			function handleTheme() {
-				const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-				const theme = localStorage.getItem('theme') || defaultTheme;
-
-				if (theme === 'dark' || (theme === 'system' && prefersDark)) {
-					document.documentElement.classList.add('dark');
-				} else {
-					document.documentElement.classList.remove('dark');
-				}
-			}
-
-			// Aplica el tema inicial
-			handleTheme();
-
-			// Escucha cambios en la preferencia del sistema
-			window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleTheme);
-		</script>
-		<title>{PUBLIC_SITE_TITLE}</title>
+		<title>Portafolio Javier Nieves</title>
 		<ViewTransitions />
 	</head>
 	<body>
